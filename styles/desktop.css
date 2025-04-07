@@ -888,3 +888,27 @@ a:hover img {
     outline-offset: 2px;
 }
 
+
+
+
+@media (max-width: 25000px) { html { font-size: 264.55px; } }
+@media (max-width: 20480px) { html { font-size: 217.27px; } }
+@media (max-width: 15360px) { html { font-size: 163.10px; } }
+@media (max-width: 12288px) { html { font-size: 130.48px; } }
+@media (max-width: 10240px) { html { font-size: 108.63px; } }
+@media (max-width: 8192px) { html { font-size: 86.90px; } }
+@media (max-width: 7680px) { html { font-size: 81.43px; } }
+@media (max-width: 5760px) { html { font-size: 61.14px; } }
+@media (max-width: 5120px) { html { font-size: 54.31px; } }
+@media (max-width: 4096px) { html { font-size: 43.54px; } }
+@media (max-width: 3840px) { html { font-size: 40.79px; } }
+@media (max-width: 3200px) { html { font-size: 34.01px; } }
+@media (max-width: 2560px) { html { font-size: 27.21px; } }
+@media (max-width: 2048px) { html { font-size: 21.77px; } }
+@media (max-width: 1920px) { html { font-size: 20.37px; } }
+@media (max-width: 1680px) { html { font-size: 17.84px; } }
+@media (max-width: 1536px) { html { font-size: 16.31px; } }
+@media (max-width: 1440px) { html { font-size: 15.29px; } }
+@media (max-width: 1280px) { html { font-size: 13.59px; } }
+@media (max-width: 1024px) { html { font-size: 10.86px; } }
+@media (max-width: 800px) { html { font-size: 8.49px; } }
