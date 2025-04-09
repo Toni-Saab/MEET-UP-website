@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join MEET UP</title>
+
+    <link rel="stylesheet" href="styles/custom-reset.css">
+    <link rel="stylesheet" href="styles/desktop.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+    <script src="scripts/dynamic-cards.js" defer></script>
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/inject-header-footer.js" defer></script>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="header"></header>
+
+
+        <main class="main">
+            <section class="events-nearby">
+                <div class="events-nearby-list">
+                    <div class="events-nearby-list__header">
+                        <h2 class="events-nearby-list__title">Events near <span class="events-nearby-list__location">New York, NY</span></h2>
+                        <nav class="events-nearby-list__tabs">
+                            <a href="#" class="events-nearby-list__tab events-nearby-list__tab--active">
+                                <span>Events</span>
+                            </a>
+                            <a href="#" class="events-nearby-list__tab">
+                                <span>Online Events</span>
+                            </a>
+                        </nav>
+                    </div>
+                    <div class="events-nearby-list__filters">
+                        <div class="nearby-events__filter-item">
+                            <button class="filter-button" aria-expanded="false" aria-controls="filter-type-options">
+                                <span class="filter-button__text">Theme</span>
+                                <img src="media/images/icons/arrow-down-list-svg.svg" alt="Arrow down list">
+                            </button>
+                            <div class="filter-options" id="filter-theme-options">
+                                <ul>
+                                    <li><a href="#" data-value="technology">Tech</a></li>
+                                    <li><a href="#" data-value="business">Biz</a></li>
+                                    <li><a href="#" data-value="social">Social</a></li>
+                                    <li><a href="#" data-value="hobbies">Hobbies</a></li>
+                                    <li><a href="#" data-value="health">Health</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="nearby-events__filter-item">
+                            <button class="filter-button" aria-expanded="false" aria-controls="filter-distance-options">
+                                <span class="filter-button__text">Distance</span>
+                                <img src="media/images/icons/arrow-down-list-svg.svg" alt="Arrow down list">
+                            </button>
+                            <div class="filter-options" id="filter-distance-options">
+                                <ul>
+                                    <li><a href="#" data-value="nearest">Nearest</a></li>
+                                    <li><a href="#" data-value="farthest">Farthest</a></li>
+                                    <li><a href="#" data-value="under50km">Under 50km</a></li>
+                                    <li><a href="#" data-value="over50km">Over 50km</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="nearby-events__filter-item">
+                            <button class="filter-button" aria-expanded="false" aria-controls="filter-category-options">
+                                <span class="filter-button__text">Day Type</span>
+                                <img src="media/images/icons/arrow-down-list-svg.svg" alt="Arrow down list">
+                            </button>
+                            <div class="filter-options" id="filter-category-options">
+                                <ul>
+                                    <li><a href="#" data-value="weekdays">WeekDAYS</a></li>
+                                    <li><a href="#" data-value="weekend">WeekEND</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nearby-events__list">
+                        <!-- Event cards -->
+                    </ul>
+                </div>
+    
+                <div class="events-nearby-map">
+                    <div class="events-nearby-map__header">
+                        <h3 class="events-nearby-map__title">Find events near</h3>
+                        <p class="events-nearby-map__location">New York, NY</p>
+                    </div>
+                    <div class="events-nearby-map__container">
+                        <iframe
+                            class="map"
+                            width="100%"
+                            height="100%"
+                            name="map"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.05057355174!2d-74.30916320286936!3d40.69719335600047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2z0J3RjNGOLdCZ0L7RgNC6LCDQodC_0L7Qu9GD0YfQtdC90ZYg0KjRgtCw0YLQuCDQkNC80LXRgNC40LrQuA!5e0!3m2!1suk!2sde!4v1744239782143!5m2!1suk!2sde"
+                            style="border:0;"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <button class="events-nearby-map__browse-button">
+                        <span>Browse in map</span>
+                        <img src="media/images/icons/arrows-diagonal-blue-svg.svg" alt="Browse in map" class="events-nearby-map__browse-icon">
+                    </button>
+            </section>
+        </main>
+    
+    
+        <footer class="footer"></footer>
+    </div>
+</body>
+</html>

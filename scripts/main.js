@@ -1,0 +1,167 @@
+class ContentManager {
+    constructor() {
+        this.headerElement = '.header';
+        this.footerElement = '.footer';
+        this.localStorageKeyForHeader = 'savedHeaderContent';
+        this.localStorageKeyForFooter = 'savedFooterContent';
+    }
+
+    storeMainPageContent() {
+        localStorage.setItem(this.localStorageKeyForHeader, document.querySelector(this.headerElement).innerHTML);
+        localStorage.setItem(this.localStorageKeyForFooter, document.querySelector(this.footerElement).innerHTML);
+    }
+
+    loadStoredContent() {
+        document.querySelector(this.headerElement).innerHTML = localStorage.getItem(this.localStorageKeyForHeader) || '';
+        document.querySelector(this.footerElement).innerHTML = localStorage.getItem(this.localStorageKeyForFooter) || '';
+    }
+}
+
+class Dropdown {
+    constructor(selector) {
+        this.container = document.querySelector(selector);
+        this.button = this.container.querySelector('.filter-button');
+        this.options = this.container.querySelector('.filter-options');
+        this.buttonText = this.button.querySelector('.filter-button__text');
+        this.links = this.options.querySelectorAll('a');
+        this.init();
+    }
+
+    init() {
+        this.button.addEventListener('click', () => this.toggle());
+        document.addEventListener('click', (e) => 
+            !this.container.contains(e.target) && this.options.classList.contains('open') && this.close()
+        );
+        this.links.forEach(link => link.addEventListener('click', (e) => this.selectOption(e)));
+    }
+
+    toggle() {
+        const isOpen = this.options.classList.toggle('open');
+        this.button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+
+    selectOption(event) {
+        event.preventDefault();
+        this.buttonText.textContent = event.target.textContent;
+
+        const filtersManager = window.filtersManager;
+        if (filtersManager) {
+            const filterGroup = this.options.id.split('-')[1];
+            filtersManager.updateFilter(filterGroup, event.target.dataset.value);
+        }
+
+        this.close();
+    }
+
+    close() {
+        this.options.classList.remove('open');
+        this.button.setAttribute('aria-expanded', 'false');
+    }
+}
+
+class FiltersManager {
+    constructor(listSelector) {
+        this.list = document.querySelector(listSelector);
+        this.activeFilters = { online: null, theme: null, distance: null, category: null };
+        this.init();
+    }
+
+    init() {
+        this.setupTabListeners();
+        this.setupDropdownListeners();
+    }
+
+    setupTabListeners() {
+        const tabs = document.querySelectorAll('.events-nearby-list__tab');
+        tabs.forEach(tab => tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            tabs.forEach(t => t.classList.remove('events-nearby-list__tab--active'));
+            tab.classList.add('events-nearby-list__tab--active');
+            this.updateFilter('online', tab.textContent.trim().toLowerCase() === 'online events' ? 'online' : null);
+        }));
+    }
+
+    setupDropdownListeners() {
+        ['theme', 'distance', 'category'].forEach(filterGroup => {
+            document.querySelectorAll(`#filter-${filterGroup}-options a`).forEach(link =>
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.updateFilter(filterGroup, link.dataset.value);
+                })
+            );
+        });
+    }
+
+    updateFilter(filterGroup, filterValue) {
+        this.activeFilters[filterGroup] = filterValue;
+        this.applyFilters();
+    }
+
+    applyFilters() {
+        const cards = Array.from(this.list.querySelectorAll('.nearby-events__list-item'));
+
+        this.activeFilters.distance === 'nearest'
+            ? cards.sort((a, b) => this.getDistance(a) - this.getDistance(b))
+            : this.activeFilters.distance === 'farthest'
+            ? cards.sort((a, b) => this.getDistance(b) - this.getDistance(a))
+            : null;
+
+        cards.forEach(card => {
+            let visible = this.applyTabFilter(card) &&
+                          this.applyThemeFilter(card) &&
+                          this.applyDistanceFilter(card) &&
+                          this.applyDayTypeFilter(card);
+
+            card.style.display = visible ? 'block' : 'none';
+        });
+
+        this.list.innerHTML = '';
+        cards.forEach(card => this.list.appendChild(card));
+    }
+
+    getDistance(card) {
+        return parseInt(card.querySelector('.event-card__distance')?.textContent.replace(/[^\d]/g, '') || 0);
+    }
+
+    applyTabFilter(card) {
+        const eventType = card.querySelector('.event-card__item-online-badge') ? 'online' : 'offline';
+        return !this.activeFilters.online || eventType === this.activeFilters.online;
+    }
+
+    applyThemeFilter(card) {
+        const eventTheme = card.querySelector('.event-card__theme').textContent.trim().toLowerCase();
+        return !this.activeFilters.theme || eventTheme.includes(this.activeFilters.theme.toLowerCase());
+    }
+
+    applyDistanceFilter(card) {
+        const eventDistance = this.getDistance(card);
+        return this.activeFilters.distance === 'under50km' ? eventDistance < 50 :
+               this.activeFilters.distance === 'over50km' ? eventDistance >= 50 : true;
+    }
+
+    applyDayTypeFilter(card) {
+        const eventDateStr = card.querySelector('.event-card__date').textContent.trim();
+        const activeDays = this.activeFilters.category
+            ? { weekend: ['Sat', 'Sun'], weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'] }[this.activeFilters.category]
+            : null;
+        return !activeDays || activeDays.some(day => eventDateStr.includes(day));
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const filtersManager = new FiltersManager('.nearby-events__list');
+    window.filtersManager = filtersManager;
+
+    ['.nearby-events__filter-item:nth-child(1)',
+     '.nearby-events__filter-item:nth-child(2)',
+     '.nearby-events__filter-item:nth-child(3)']
+    .forEach(selector => new Dropdown(selector));
+});
+
+
+
+
+
+document.getElementById('goToJoinPage').addEventListener('click', () => {
+    window.location.href = 'join.html';
+});

@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>MEET UP</title>
+
     <link rel="stylesheet" href="styles/custom-reset.css">
     <link rel="stylesheet" href="styles/desktop.css">
     <link rel="stylesheet" href="styles/mobile.css">
+
     <script src="scripts/main.js" defer></script>
+    <script src="scripts/copy-header-footer.js" defer></script>
 </head>
 <body>
     <div class="page-wrapper">
 
         <header class="header">
             <div class="header__logo">
-                <img src="media/images/logos/meetup-svg.svg" alt="Meetup Logo" class="header__logo-image">
+                <a href="/" class="header__logo-link" aria-label="Return to homepage">
+                    <img src="media/images/logos/meetup-svg.svg" alt="Meetup Logo" class="header__logo-image">
+                </a>
             </div>
             <div class="header__search-location">
                 <div class="header__search">
@@ -52,7 +58,7 @@
                 <div class="join-us__content">
                     <h2 class="join-us__title">The people platform—Where<br>interests become friendships</h2>
                     <p class="join-us__description">Whatever your interest, from hiking and reading to networking and skill sharing,<br> there are thousands of people who share it on Meetup. Events are happening<br> every day—sign up to join the fun.</p>
-                    <button class="join-us__action">Join Meetup</button>
+                    <button id="goToJoinPage" class="join-us__action">Join Meetup</button>
                 </div>
                 <div class="join-us__visual">
                     <img src="media/images/illustrations/people-on-bicycle-svg.svg" alt="Hands Raised In A Circle" class="join-us__image">

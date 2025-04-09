@@ -16,7 +16,18 @@
     font-display: fallback;
 }
 
+
+
+
+/*----settings--------------------------------------------------------------------------------START----*/
+
+::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+
 html, body {
+    scrollbar-width: none;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
 	font-size: 14.45px;
     color: rgb(33, 33, 33);
@@ -63,6 +74,11 @@ li {
     list-style: none;
 }
   
+/*----settings--------------------------------------------------------------------------------END----*/
+
+
+/*----index.html--------------------------------------------------------------------------------START----*/
+
 .page-wrapper {
     min-width: 100%;
 }
@@ -79,6 +95,9 @@ li {
 }
 .header__logo {
     margin-left: 1.5rem;
+}
+.header__logo-link {
+
 }
 .header__logo-image {
     width: 5.9rem;
@@ -104,6 +123,7 @@ li {
 .header__search-button {
     padding-left: 0.8rem;
     padding-right: 0.5rem;
+    border-radius: 0.5rem 0 0 0.5rem;
 }
 .header__search-icon {
     width: 1.02rem;
@@ -147,6 +167,7 @@ li {
     display: flex; 
     align-items: center;
     font-weight: 500;
+    border-radius: 0.5rem;
 }
 .header__language-icon {
     margin-right: 0.5rem;
@@ -154,6 +175,7 @@ li {
 .header__login {
     margin-left: 1.375rem;
     margin-right: 1.375rem;
+    border-radius: 0.5rem;
 }
 .header__signup {
     color: #fff;
@@ -832,8 +854,235 @@ li {
     line-height: 1.25rem;
 }
 
+/*----index.html--------------------------------------------------------------------------------END----*/
 
 
+/*----join.html--------------------------------------------------------------------------------START----*/
+
+.events-nearby {
+    margin-top: 5.5rem;
+    padding: 0 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.events-nearby-list {
+    max-width: 57%;
+}
+.events-nearby-list__header {
+}
+.events-nearby-list__title {
+    color: rgb(0, 0, 0);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 2.25rem;
+}
+.events-nearby-list__location {
+}
+.events-nearby-list__tabs {
+    margin-top: 1.25rem;
+}
+.events-nearby-list__tab {
+    color: rgb(0, 121, 138);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-right: 1.5rem;
+}
+.events-nearby-list__tab--active span::after {
+    content: "";
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: -0.25rem;
+    height: 0.25rem;
+    background-color: rgb(0, 121, 138);
+}
+.events-nearby-list__filters {
+    display: flex;
+    margin-top: 0.75rem;
+}
+.nearby-events__filter-item {
+    position: relative;
+    margin-right: 1.125rem;
+}
+.filter-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 2.5rem;
+    background-color: rgb(246, 247, 248);
+    padding: 1rem 1rem;
+}
+.filter-button__text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(33, 33, 33);
+    margin-right: 0.875rem;
+}
+  
+.filter-button img {
+    width: 0.75rem;
+    height: 0.4rem;
+}
+.filter-options {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    z-index: 10;
+    background-color: rgb(246, 247, 248);
+    border-radius: 1.5rem 1.5rem 2.5rem 2.5rem;
+    display: none;
+}
+.filter-options li {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+}
+.filter-options li a {
+    color: rgb(33, 33, 33);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+.filter-options.open {
+    display: block;
+}
+.nearby-events__list {
+    margin-top: 3.5rem;
+}
+.nearby-events__list-item{
+}
+.nearby-events__list-item > hr {
+    border: none;
+    background-color:  rgb(217, 217, 217);
+    height: 0.1rem;
+}
+.event-card {
+    margin-top: 0.5rem;
+    display: flex;
+}
+.event-card__image {
+    min-width: 45%;
+    height: auto;
+    border-radius: 0.5rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 0.75rem;
+}
+
+.event-card__item-online-badge {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 4%;
+    margin-left: 4%;
+    width: 6.57rem;
+    border-radius: 0.25rem;
+    background: rgb(255, 255, 255);
+    color: rgb(112, 112, 112);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.event-card__item-online-badge-icon {
+    width: 0.9rem;
+    height: 0.9rem;
+}
+.event-card__details {
+    margin-top: 0.25rem;
+    
+}
+.event-card__date {
+    color: rgb(124, 111, 80);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+.event-card__title {
+    color: rgb(33, 33, 33);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    margin-top: 0.5rem;
+}
+.event-card__description {
+    color: rgb(51, 51, 51);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1rem;
+    margin-top: 0.5rem;
+}
+.event-card__theme {
+    color: rgb(112, 112, 112);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+.event-card__distance {
+}
+.event-card__attendees {
+    color: rgb(112, 112, 112);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+.event-card__attendees-count {
+
+}
+.event-card__spots-left {
+    color: rgb(227, 35, 89);
+}
+.events-nearby-map {
+    position: relative;
+}
+.events-nearby-map__header {
+}
+.events-nearby-map__title {
+    color: rgb(33, 33, 33);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.events-nearby-map__location {
+    color: rgb(33, 33, 33);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+.events-nearby-map__container {
+    margin-top: 0.875rem;
+    width: 21.875rem;
+    height: 17.8125rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    filter: blur(0.25rem);
+    pointer-events: none;
+}
+
+.events-nearby-map__browse-button {
+    position:absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.125rem solid rgb(0, 121, 138);
+    border-radius: 0.5rem;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 121, 138);
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    z-index: 10;
+    top: 55%;
+    left: 25%;
+
+}
+.events-nearby-map__browse-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-left: 0.5rem;
+}
+
+/*----join.html--------------------------------------------------------------------------------END----*/
+
+
+/*----buttons and links reaction styles-------------------------------------------------------START----*/
 
 button:hover,
 input[type="submit"]:hover {
@@ -842,7 +1091,6 @@ input[type="submit"]:hover {
     transition: all 0.25s ease;
     filter: brightness(1.15) contrast(1.1);
     cursor: pointer;
-    outline: none;
 }
 
 a {
@@ -887,6 +1135,12 @@ a:hover img {
     outline: 2px solid rgba(0, 191, 255, 0.4);
     outline-offset: 2px;
 }
+
+/*----buttons and links reaction styles-------------------------------------------------------END----*/
+
+
+
+
 
 
 
