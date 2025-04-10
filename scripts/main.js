@@ -1,3 +1,81 @@
+class StylesManager {
+    constructor() {
+        this.mobileStylesheet = document.querySelector('link[href="styles/mobile.css"]');
+        this.desktopStylesheet = document.querySelector('link[href="styles/desktop.css"]');
+        this.image = document.querySelector('.join-meetup__visual .join-meetup__image');
+        this.buttonJoinMeetup = document.querySelector('.join-meetup__action');
+        this.buttonJoinUs = document.querySelector('.join-us__action');
+    }
+
+    checkAndApplyStyles() {
+        window.innerWidth <= 640 
+            ? this.applyMobileStyles() 
+            : this.applyDesktopStyles();
+    }
+
+    applyMobileStyles() {
+        this.toggleStyles(true);
+        this.moveImage(true);
+        this.switchButton(true);
+    }
+
+    applyDesktopStyles() {
+        this.toggleStyles(false);
+        this.moveImage(false);
+        this.switchButton(false);
+    }
+
+    toggleStyles(isMobile) {
+        this.mobileStylesheet.disabled = !isMobile;
+        this.desktopStylesheet.disabled = isMobile;
+    }
+
+    moveImage(isMobile) {
+        const title = document.querySelector(".join-meetup__title");
+        const description = document.querySelector(".join-meetup__description");
+        const container = document.querySelector(".join-meetup__visual");
+
+        isMobile && this.image && title && description
+            ? description.parentNode.insertBefore(this.image, description)
+            : this.image && container && container.appendChild(this.image);
+    }
+
+    switchButton(isMobile) {
+        const activeButton = isMobile ? this.buttonJoinMeetup : this.buttonJoinUs;
+        const inactiveButton = isMobile ? this.buttonJoinUs : this.buttonJoinMeetup;
+
+        inactiveButton?.removeAttribute('id');
+        this.addNavigationHandler(inactiveButton, false);
+
+        activeButton?.setAttribute('id', 'goToJoinPage');
+        this.addNavigationHandler(activeButton, true);
+    }
+
+    addNavigationHandler(button, add) {
+        button?.removeEventListener('click', this.navigateToJoinPage);
+        add && button?.addEventListener('click', this.navigateToJoinPage);
+    }
+
+    navigateToJoinPage() {
+        window.location.href = 'join.html';
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const stylesManager = new StylesManager();
+
+    stylesManager.checkAndApplyStyles();
+
+    window.addEventListener('resize', () => stylesManager.checkAndApplyStyles());
+    window.matchMedia("(max-width: 640px)").addEventListener("change", () => stylesManager.checkAndApplyStyles());
+});
+
+
+
+
+
+
+
 class ContentManager {
     constructor() {
         this.headerElement = '.header';
@@ -200,20 +278,3 @@ class MapToggleButton {
 document.addEventListener('DOMContentLoaded', () => {
     new MapToggleButton('.events-nearby-map__container', '.events-nearby-map__browse-button');
 });
-
-
-
-
-
-
-
-
-
-
-document.getElementById('goToJoinPage').addEventListener('click', () => {
-    window.location.href = 'join.html';
-});
-
-
-
-
