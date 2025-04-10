@@ -884,7 +884,6 @@ li {
 }
 .events-nearby-list__tab {
     color: rgb(0, 121, 138);
-    font-family: 'Roboto', sans-serif;
     font-size: 1.25rem;
     font-weight: 500;
     margin-right: 1.5rem;
@@ -901,51 +900,62 @@ li {
 .events-nearby-list__filters {
     display: flex;
     margin-top: 0.75rem;
+    justify-content: space-between;
 }
 .nearby-events__filter-item {
     position: relative;
-    margin-right: 1.125rem;
 }
 .filter-button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-radius: 2.5rem;
+    border-radius: 2.5em;
     background-color: rgb(246, 247, 248);
-    padding: 1rem 1rem;
+    padding: 1em 3em;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 0.875em;
 }
 .filter-button__text {
-    font-size: 0.875rem;
     font-weight: 500;
     color: rgb(33, 33, 33);
-    margin-right: 0.875rem;
+    margin-right: 0.875em;
 }
-  
 .filter-button img {
-    width: 0.75rem;
-    height: 0.4rem;
+    width: 0.75em;
+    height: 0.4em;
 }
 .filter-options {
     position: absolute;
-    top: 15%;
+    top: 0;
     left: 0;
     z-index: 10;
     background-color: rgb(246, 247, 248);
-    border-radius: 1.5rem 1.5rem 2.5rem 2.5rem;
+    border-radius: 2.5em;
     display: none;
-}
-.filter-options li {
-    display: flex;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-}
-.filter-options li a {
-    color: rgb(33, 33, 33);
-    font-size: 0.875rem;
-    font-weight: 500;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0;
 }
 .filter-options.open {
     display: block;
+}
+.filter-options ul {
+    padding: 0;
+    margin: 0;
+    border-radius: 0 0 2.5em 2.5em;
+}
+.filter-options li {
+    padding: 0.8em 3em;
+}
+.filter-options li a {
+    display: block;
+    color: rgb(33, 33, 33);
+    font-size: 0.875em;
+    font-weight: 500;
+    width: 100%;
+}
+.filter-options.open {
 }
 .nearby-events__list {
     margin-top: 3.5rem;
@@ -1166,3 +1176,4 @@ a:hover img {
 @media (max-width: 1280px) { html { font-size: 13.59px; } }
 @media (max-width: 1024px) { html { font-size: 10.86px; } }
 @media (max-width: 800px) { html { font-size: 8.49px; } }
+@media (max-width: 640px) { html { font-size: 6.77px; } }

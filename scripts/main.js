@@ -120,7 +120,7 @@ class FiltersManager {
     }
 
     getDistance(card) {
-        return parseInt(card.querySelector('.event-card__distance')?.textContent.replace(/[^\d]/g, '') || 0);
+        return parseInt(card.querySelector('.event-card__distance').textContent.replace(/[^\d]/g, '') || 0);
     }
 
     applyTabFilter(card) {
@@ -162,6 +162,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+class MapToggleButton {
+    constructor(mapContainerSelector, browseButtonSelector) {
+        this.mapContainer = document.querySelector(mapContainerSelector);
+        this.browseButton = document.querySelector(browseButtonSelector);
+        this.initialMapStyles = {
+            filter: 'blur(0.25rem)',
+            pointerEvents: 'none',
+        };
+        this.initialButtonPosition = 'absolute';
+        this.isMapOpen = false;
+        this.browseButton.addEventListener('click', this.toggleMapState.bind(this));
+    }
+
+    resetState() {
+        Object.assign(this.mapContainer.style, this.initialMapStyles);
+        this.browseButton.style.position = this.initialButtonPosition;
+    }
+
+    openMap() {
+        this.mapContainer.style.filter = 'none';
+        this.mapContainer.style.pointerEvents = 'auto';
+        this.browseButton.style.position = 'static';
+        this.isMapOpen = true;
+    }
+
+    closeMap() {
+        this.resetState();
+        this.isMapOpen = false;
+    }
+
+    toggleMapState() {
+        this.isMapOpen ? this.closeMap() : this.openMap();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    new MapToggleButton('.events-nearby-map__container', '.events-nearby-map__browse-button');
+});
+
+
+
+
+
+
+
+
+
+
 document.getElementById('goToJoinPage').addEventListener('click', () => {
     window.location.href = 'join.html';
 });
+
+
+
+
