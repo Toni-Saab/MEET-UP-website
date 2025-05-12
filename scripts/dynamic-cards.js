@@ -2,6 +2,8 @@ class EventsManager {
     constructor(containerSelector, jsonPath) {
         this.container = document.querySelector(containerSelector);
         this.jsonPath = jsonPath;
+
+        this.loadCards()
     }
 
     loadCards() {
@@ -46,11 +48,23 @@ class EventCard {
                         : ''}
                 </div>
                 <div class="event-card__details">
-                    ${this.data.date ? `<p class="event-card__date">${this.formatDate(this.data.date)}</p>` : ''}
-                    ${this.data.title ? `<h3 class="event-card__title">${this.data.title}</h3>` : ''}
-                    ${this.data.description ? `<p class="event-card__description">${this.data.description}</p>` : ''}
-                    ${this.data.theme ? `<p class="event-card__theme">${this.data.theme}${this.data.distance ? ` <span class="event-card__distance">(${this.data.distance} km)</span>` : ''}</p>` : ''}
-                    ${this.data.attendees !== undefined ? `<p class="event-card__attendees"><span class="event-card__attendees-count">${this.data.attendees}</span> attendees</p>` : ''}
+                    ${this.data.date 
+                        ? `<p class="event-card__date">${this.formatDate(this.data.date)}</p>` 
+                        : ''}
+                    ${this.data.title 
+                        ? `<h3 class="event-card__title">${this.data.title}</h3>` 
+                        : ''}
+                    ${this.data.description 
+                        ? `<p class="event-card__description">${this.data.description}</p>` 
+                        : ''}
+                    ${this.data.theme 
+                        ? `<p class="event-card__theme">${this.data.theme}${this.data.distance 
+                            ? ` <span class="event-card__distance">(${this.data.distance} km)</span>` 
+                            : ''}</p>` 
+                        : ''}
+                    ${this.data.attendees !== undefined 
+                        ? `<p class="event-card__attendees"><span class="event-card__attendees-count">${this.data.attendees}</span> attendees</p>` 
+                        : ''}
                 </div>
             </article>
         `;
@@ -72,5 +86,4 @@ class EventCard {
 
 document.addEventListener('DOMContentLoaded', () => {
     const manager = new EventsManager('.nearby-events__list', '../JSON/events.json');
-    manager.loadCards();
 });

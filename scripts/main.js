@@ -95,6 +95,8 @@ class ContentManager {
     }
 }
 
+
+
 class Dropdown {
     constructor(selector) {
         this.container = document.querySelector(selector);
@@ -121,13 +123,6 @@ class Dropdown {
     selectOption(event) {
         event.preventDefault();
         this.buttonText.textContent = event.target.textContent;
-
-        const filtersManager = window.filtersManager;
-        if (filtersManager) {
-            const filterGroup = this.options.id.split('-')[1];
-            filtersManager.updateFilter(filterGroup, event.target.dataset.value);
-        }
-
         this.close();
     }
 
@@ -136,6 +131,8 @@ class Dropdown {
         this.button.setAttribute('aria-expanded', 'false');
     }
 }
+
+
 
 class FiltersManager {
     constructor(listSelector) {
@@ -181,8 +178,8 @@ class FiltersManager {
         this.activeFilters.distance === 'nearest'
             ? cards.sort((a, b) => this.getDistance(a) - this.getDistance(b))
             : this.activeFilters.distance === 'farthest'
-            ? cards.sort((a, b) => this.getDistance(b) - this.getDistance(a))
-            : null;
+                ? cards.sort((a, b) => this.getDistance(b) - this.getDistance(a))
+                : null;
 
         cards.forEach(card => {
             let visible = this.applyTabFilter(card) &&
@@ -213,8 +210,11 @@ class FiltersManager {
 
     applyDistanceFilter(card) {
         const eventDistance = this.getDistance(card);
-        return this.activeFilters.distance === 'under50km' ? eventDistance < 50 :
-               this.activeFilters.distance === 'over50km' ? eventDistance >= 50 : true;
+        return this.activeFilters.distance === 'under50km' 
+                    ? eventDistance < 50 
+                    :   this.activeFilters.distance === 'over50km' 
+                        ? eventDistance >= 50 
+                        : true;
     }
 
     applyDayTypeFilter(card) {
@@ -226,55 +226,37 @@ class FiltersManager {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const filtersManager = new FiltersManager('.nearby-events__list');
-    window.filtersManager = filtersManager;
-
-    ['.nearby-events__filter-item:nth-child(1)',
-     '.nearby-events__filter-item:nth-child(2)',
-     '.nearby-events__filter-item:nth-child(3)']
-    .forEach(selector => new Dropdown(selector));
-});
-
-
-
 
 
 class MapToggleButton {
     constructor(mapContainerSelector, browseButtonSelector) {
         this.mapContainer = document.querySelector(mapContainerSelector);
         this.browseButton = document.querySelector(browseButtonSelector);
-        this.initialMapStyles = {
-            filter: 'blur(0.25rem)',
-            pointerEvents: 'none',
-        };
-        this.initialButtonPosition = 'absolute';
         this.isMapOpen = false;
-        this.browseButton.addEventListener('click', this.toggleMapState.bind(this));
-    }
 
-    resetState() {
-        Object.assign(this.mapContainer.style, this.initialMapStyles);
-        this.browseButton.style.position = this.initialButtonPosition;
-    }
-
-    openMap() {
-        this.mapContainer.style.filter = 'none';
-        this.mapContainer.style.pointerEvents = 'auto';
-        this.browseButton.style.position = 'static';
-        this.isMapOpen = true;
-    }
-
-    closeMap() {
-        this.resetState();
-        this.isMapOpen = false;
+        this.browseButton.addEventListener('click', () => this.toggleMapState());
     }
 
     toggleMapState() {
-        this.isMapOpen ? this.closeMap() : this.openMap();
+        this.isMapOpen = !this.isMapOpen;
+        this.mapContainer.style.filter = this.isMapOpen ? 'none' : 'blur(0.25rem)';
+        this.mapContainer.style.pointerEvents = this.isMapOpen ? 'auto' : 'none';
+        this.browseButton.style.position = this.isMapOpen ? 'static' : 'absolute';
     }
 }
 
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
+     new FiltersManager('.nearby-events__list');
+
+
+    ['.nearby-events__filter-item:nth-child(1)',
+     '.nearby-events__filter-item:nth-child(2)',
+     '.nearby-events__filter-item:nth-child(3)']
+    .forEach(selector => new Dropdown(selector));
+
+
     new MapToggleButton('.events-nearby-map__container', '.events-nearby-map__browse-button');
 });
